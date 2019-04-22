@@ -1,12 +1,6 @@
 import React, {Component, useState} from 'react';
 //import logo from './logo.svg';
-import {
-  Tabs,
-  Content,
-  Columns,
-  Container,
-  Heading,
-} from 'react-bulma-components/full';
+import {Tabs, Content, Container} from 'react-bulma-components/full';
 import axios from 'axios';
 import './App.css';
 
@@ -30,7 +24,6 @@ function Explorer(props) {
   ));
 
   function handleClick(e) {
-    //console.log(e.target.innerText);
     const selectedLanguage = e.target.innerText;
     fetchRepos({language: selectedLanguage});
   }
@@ -50,9 +43,12 @@ function Explorer(props) {
   }
 
   return (
-    <Tabs align="centered" type="toggle-rounded">
-      {languagesTabs}
-    </Tabs>
+    <Container>
+      <Tabs align="centered" type="toggle-rounded">
+        {languagesTabs}
+      </Tabs>
+      <Content>{reposContent}</Content>
+    </Container>
   );
 }
 
