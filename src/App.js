@@ -1,6 +1,12 @@
 import React, {Component, useState} from 'react';
 //import logo from './logo.svg';
-import {Tabs, Content} from 'react-bulma-components/full';
+import {
+  Tabs,
+  Content,
+  Columns,
+  Container,
+  Heading,
+} from 'react-bulma-components/full';
 import axios from 'axios';
 import './App.css';
 
@@ -44,11 +50,9 @@ function Explorer(props) {
   }
 
   return (
-    <div className="tabs">
-      <Tabs type="toggle-rounded">{languagesTabs}</Tabs>
-      <br />
-      <Content>{reposContent}</Content>
-    </div>
+    <Tabs align="centered" type="toggle-rounded">
+      {languagesTabs}
+    </Tabs>
   );
 }
 
@@ -56,7 +60,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Explorer languages={languages} />
+        <Container>
+          <Explorer languages={languages} />
+        </Container>
       </div>
     );
   }
