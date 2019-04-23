@@ -1,32 +1,45 @@
 import React, {Component, useState} from 'react';
-//import logo from './logo.svg';
-import {Tabs, Content, Container} from 'react-bulma-components/full';
+import 'bulma/css/bulma.css';
 import axios from 'axios';
 import './App.css';
 
 const languages = ['Clojure', 'Elixir', 'Go', 'Rust', 'Javascript'];
 
-function Explorer(props) {
+function Tab({active, text, onClickHandler}) {
+  function handleClick(e) {
+    let language = '';
+    if (e.target.text !== undefined) {
+      language = e.target.text.toLowerCase();
+      console.log(language);
+      onClickHandler({language: language});
+    }
+  }
+  return (
+    <li className={active ? 'is-active' : ''}>
+      <a onClick={handleClick}>
+        <span className="icon is-small">
+          <i className="fas fa-image" aria-hidden="true" />
+        </span>
+        <span>{text}</span>
+      </a>
+    </li>
+  );
+}
+
+function Explorer({languages}) {
   const [repos, setRepos] = useState([]);
-  const languagesTabs = props.languages.map((lang, i) => (
-    <Tabs.Tab onClick={handleClick} key={i}>
-      {lang}
-    </Tabs.Tab>
+  const tabItems = languages.map((item, i) => (
+    <Tab onClickHandler={fetchRepos} text={item} key={i} />
   ));
   const reposContent = repos.map((repo, i) => (
-    <Content key={i}>
+    <div key={i}>
       <h1>{repo.name}</h1>
       <p>{repo.description}</p>
       <p>Author: {repo.author}</p>
       <a href={repo.url}>{repo.url}</a>
       <p>Stars: {repo.stars}</p>
-    </Content>
+    </div>
   ));
-
-  function handleClick(e) {
-    const selectedLanguage = e.target.innerText;
-    fetchRepos({language: selectedLanguage});
-  }
 
   function fetchRepos({language}) {
     console.log(`Fetching repos for ${language}`);
@@ -43,12 +56,12 @@ function Explorer(props) {
   }
 
   return (
-    <Container>
-      <Tabs align="centered" type="toggle-rounded">
-        {languagesTabs}
-      </Tabs>
-      <Content>{reposContent}</Content>
-    </Container>
+    <div>
+      <div className="tabs is-centered">
+        <ul>{tabItems}</ul>
+      </div>
+      <div>{reposContent}</div>
+    </div>
   );
 }
 
@@ -56,12 +69,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Container>
-          <Explorer languages={languages} />
-        </Container>
+        <Explorer languages={languages} />
       </div>
     );
   }
 }
 
 export default App;
+//const bla = e.target.parentNode.parentNode;
+//const className = e.target.parentNode.parentNode.className;
+//if (className !== '' && text !== '') {
+//console.log('foi');
+//bla.className = '';
+//}
