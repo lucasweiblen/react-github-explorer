@@ -9,8 +9,10 @@ function Tab({active, text, onClickHandler}) {
   function handleClick(e) {
     let language = '';
     if (e.target.textContent !== undefined) {
+      //     console.log(e.target.parentElement);
+      e.target.parentElement.className = 'is-active';
       language = e.target.textContent.toLowerCase();
-      console.log(language);
+      //console.log(language);
       onClickHandler({language: language});
     }
   }
@@ -25,8 +27,14 @@ function Tab({active, text, onClickHandler}) {
 
 function Explorer({languages}) {
   const [repos, setRepos] = useState([]);
+  const [selectedLang, setSelectedLang] = useState('Elixir');
   const tabItems = languages.map((item, i) => (
-    <Tab onClickHandler={fetchRepos} text={item} key={i} />
+    <Tab
+      active={selectedLang == item ? 'is-active' : ''}
+      onClickHandler={fetchRepos}
+      text={item}
+      key={i}
+    />
   ));
   const reposContent = repos.map((repo, i) => (
     <div key={i}>
@@ -38,13 +46,18 @@ function Explorer({languages}) {
     </div>
   ));
 
+  const capitalize = s => {
+    if (typeof s !== 'string') return '';
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
+
   function fetchRepos({language}) {
     console.log(`Fetching repos for ${language}`);
+    setSelectedLang(capitalize(language));
     const url = `https://github-trending-api.now.sh/repositories?language=${language.toLowerCase()}`;
     axios
       .get(url)
       .then(response => {
-        console.log(response.data);
         setRepos(response.data);
       })
       .catch(error => {
