@@ -38,11 +38,12 @@ function Explorer({languages}) {
   ));
   const reposContent = repos.map((repo, i) => (
     <div key={i}>
-      <h1>{repo.name}</h1>
+      <h1 className="title is-5">{repo.name}</h1>
       <p>{repo.description}</p>
       <p>Author: {repo.author}</p>
       <a href={repo.url}>{repo.url}</a>
       <p>Stars: {repo.stars}</p>
+      <br/>
     </div>
   ));
 
