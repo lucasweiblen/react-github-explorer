@@ -67,7 +67,7 @@ function Explorer({languages}) {
 
   return (
     <div>
-      <div className="tabs is-centered">
+      <div className="tabs is-toggle is-toggle-rounded is-centered">
         <ul>{tabItems}</ul>
       </div>
       <div>{reposContent}</div>
@@ -86,9 +86,3 @@ class App extends Component {
 }
 
 export default App;
-//const bla = e.target.parentNode.parentNode;
-//const className = e.target.parentNode.parentNode.className;
-//if (className !== '' && text !== '') {
-//console.log('foi');
-//bla.className = '';
-//}
