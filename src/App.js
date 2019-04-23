@@ -8,8 +8,8 @@ const languages = ['Clojure', 'Elixir', 'Go', 'Rust', 'Javascript'];
 function Tab({active, text, onClickHandler}) {
   function handleClick(e) {
     let language = '';
-    if (e.target.text !== undefined) {
-      language = e.target.text.toLowerCase();
+    if (e.target.textContent !== undefined) {
+      language = e.target.textContent.toLowerCase();
       console.log(language);
       onClickHandler({language: language});
     }
@@ -17,9 +17,6 @@ function Tab({active, text, onClickHandler}) {
   return (
     <li className={active ? 'is-active' : ''}>
       <a onClick={handleClick}>
-        <span className="icon is-small">
-          <i className="fas fa-image" aria-hidden="true" />
-        </span>
         <span>{text}</span>
       </a>
     </li>
