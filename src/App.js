@@ -30,7 +30,7 @@ function Explorer({languages}) {
   const [selectedLang, setSelectedLang] = useState('Elixir');
   const tabItems = languages.map((item, i) => (
     <Tab
-      active={selectedLang == item ? 'is-active' : ''}
+      active={selectedLang === item ? 'is-active' : ''}
       onClickHandler={fetchRepos}
       text={item}
       key={i}
