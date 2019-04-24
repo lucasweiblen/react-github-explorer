@@ -9,10 +9,8 @@ function Tab({active, text, onClickHandler}) {
   function handleClick(e) {
     let language = '';
     if (e.target.textContent !== undefined) {
-      //     console.log(e.target.parentElement);
       e.target.parentElement.className = 'is-active';
       language = e.target.textContent.toLowerCase();
-      //console.log(language);
       onClickHandler({language: language});
     }
   }
@@ -43,7 +41,7 @@ function Explorer({languages}) {
       <p>Author: {repo.author}</p>
       <a href={repo.url}>{repo.url}</a>
       <p>Stars: {repo.stars}</p>
-      <br/>
+      <br />
     </div>
   ));
 
