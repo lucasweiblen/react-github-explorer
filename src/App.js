@@ -5,7 +5,7 @@ import './App.css';
 
 const languages = ['Clojure', 'Elixir', 'Go', 'Rust', 'Javascript'];
 
-function Tab({active, text, onClickHandler}) {
+export function Tab({active, text, onClickHandler}) {
   function handleClick(e) {
     let language = '';
     if (e.target.textContent !== undefined) {
