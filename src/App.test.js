@@ -1,7 +1,6 @@
 import React from 'react';
 import App from './App';
 import Explorer from './App';
-import Tab from './App';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 

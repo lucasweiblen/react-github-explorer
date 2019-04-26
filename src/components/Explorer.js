@@ -13,8 +13,9 @@ function Explorer({languages}) {
       key={i}
     />
   ));
+
   const reposContent = repos.map((repo, i) => (
-    <div key={i}>
+    <div className="column is-one-quarter" key={i}>
       <h1 className="title is-5">{repo.name}</h1>
       <p>{repo.description}</p>
       <p>Author: {repo.author}</p>
@@ -48,7 +49,7 @@ function Explorer({languages}) {
       <div className="tabs is-toggle is-toggle-rounded is-centered">
         <ul>{tabItems}</ul>
       </div>
-      <div>{reposContent}</div>
+      <div className="columns is-multiline is-mobile">{reposContent}</div>
     </div>
   );
 }

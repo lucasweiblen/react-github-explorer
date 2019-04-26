@@ -3,7 +3,6 @@ import 'bulma/css/bulma.css';
 import './App.css';
 import AddLanguageFormWithHooks from './components/AddLanguageFormWithHooks';
 import Explorer from './components/Explorer';
-import Tab from './components/Tab';
 
 const languages = ['Clojure', 'Elixir', 'Go', 'Rust', 'Javascript'];
 
