@@ -18,7 +18,7 @@ describe('AddLanguageFormWithHooks', () => {
     expect(wrapper.props().addLanguageHandler).not.toBeNull();
     const foo = wrapper.find('input[type="text"]');
     foo.simulate('change', {target: {value: 'clojure'}});
-    wrapper.find('form').simulate('submit', {preventDefault: x => true});
+    wrapper.find('form').simulate('submit', {preventDefault: () => true});
     expect(mockCallback.mock.calls.length).toBe(1);
   });
 });
