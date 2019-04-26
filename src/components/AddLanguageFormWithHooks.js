@@ -21,6 +21,7 @@ const AddLanguageFormWithHooks = props => {
         onChange={handleChange}
         placeholder="Add new language with hooks"
       />
+      &nbsp;&nbsp;
       <input type="submit" value="Add" />
     </form>
   );
