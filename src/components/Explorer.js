@@ -14,8 +14,12 @@ function Explorer({languages}) {
     />
   ));
 
+  const style = {
+    backgroundColor: 'cyan',
+  };
+
   const reposContent = repos.map((repo, i) => (
-    <div className="column is-one-quarter" key={i}>
+    <div className="column is-one-quarter" key={i} style={style}>
       <h1 className="title is-5">{repo.name}</h1>
       <p>{repo.description}</p>
       <p>Author: {repo.author}</p>
