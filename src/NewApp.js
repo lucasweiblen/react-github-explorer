@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import 'bulma/css/bulma.css';
 //import AddLanguageFormWithHooks from './components/AddLanguageFormWithHooks';
 //import Explorer from './components/Explorer';
@@ -22,30 +22,50 @@ const projects = [
   },
 ];
 
-function AddNewLangForm() {
+const AddLanguageForm = ({addLanguageHandler}) => {
+  const [language, setLanguage] = useState('');
+
+  const handleChange = e => {
+    setLanguage(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    if (language !== '') {
+      console.log(`AddLanguageForm -> adding new language: ${language}`);
+      addLanguageHandler({language});
+      e.preventDefault();
+    }
+  };
+
   return (
     <div className="level-left">
       <div className="level-item">
         <div className="field has-addons">
-          <p className="control">
-            <input
-              className="input"
-              type="text"
-              placeholder="Add new language"
-            />
-          </p>
-          <p className="control">
-            <button className="button is-outlined">
-              <i className="fas fa-plus" />
-            </button>
-          </p>
+          <form onSubmit={handleSubmit}>
+            <p className="control">
+              <input
+                className="input"
+                type="text"
+                value={language}
+                onChange={handleChange}
+                placeholder="Add new language"
+              />
+              <button type="submit" className="button is-outlined">
+                <i className="fas fa-plus" />
+              </button>
+            </p>
+          </form>
         </div>
       </div>
     </div>
   );
-}
+};
 
 function LanguagesContainer({languages, current}) {
+  const handleAddNewLanguage = ({language}) => {
+    console.log(`LanguagesContainer -> adding new language ${language}`);
+  };
+
   const langs = languages.map((val, key) => {
     return (
       <a
@@ -57,7 +77,12 @@ function LanguagesContainer({languages, current}) {
     );
   });
 
-  return <div>{langs}</div>;
+  return (
+    <div>
+      <AddLanguageForm addLanguageHandler={handleAddNewLanguage} />
+      {langs}
+    </div>
+  );
 }
 
 function FrequencyContainer({frequencies, current}) {
@@ -166,7 +191,6 @@ function ProjectsContainer({projects}) {
 function MainNavbar(props) {
   return (
     <nav className="level">
-      <AddNewLangForm />
       <LanguagesContainer languages={props.languages} current="Clojure" />
       <FrequencyContainer frequencies={props.frequencies} current="Daily" />
     </nav>
@@ -209,3 +233,26 @@ class NewApp extends Component {
 }
 
 export default NewApp;
+
+//function AddNewLangForm() {
+//return (
+//<div className="level-left">
+//<div className="level-item">
+//<div className="field has-addons">
+//<p className="control">
+//<input
+//className="input"
+//type="text"
+//placeholder="Add new language"
+///>
+//</p>
+//<p className="control">
+//<button className="button is-outlined">
+//<i className="fas fa-plus" />
+//</button>
+//</p>
+//</div>
+//</div>
+//</div>
+//);
+//}
