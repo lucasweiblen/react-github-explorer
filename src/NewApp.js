@@ -62,11 +62,14 @@ const AddLanguageForm = ({addLanguageHandler}) => {
 };
 
 function LanguagesContainer({languages, current}) {
+  const [langs, setLanguages] = useState(languages);
+
   const handleAddNewLanguage = ({language}) => {
     console.log(`LanguagesContainer -> adding new language ${language}`);
+    setLanguages([...languages, language]);
   };
 
-  const langs = languages.map((val, key) => {
+  const _langs = langs.map((val, key) => {
     return (
       <button
         className={current === val ? 'button is-active' : 'button'}
@@ -79,7 +82,7 @@ function LanguagesContainer({languages, current}) {
   return (
     <div>
       <AddLanguageForm addLanguageHandler={handleAddNewLanguage} />
-      {langs}
+      {_langs}
     </div>
   );
 }
@@ -231,26 +234,3 @@ class NewApp extends Component {
 }
 
 export default NewApp;
-
-//function AddNewLangForm() {
-//return (
-//<div className="level-left">
-//<div className="level-item">
-//<div className="field has-addons">
-//<p className="control">
-//<input
-//className="input"
-//type="text"
-//placeholder="Add new language"
-///>
-//</p>
-//<p className="control">
-//<button className="button is-outlined">
-//<i className="fas fa-plus" />
-//</button>
-//</p>
-//</div>
-//</div>
-//</div>
-//);
-//}
