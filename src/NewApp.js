@@ -5,18 +5,38 @@ import 'bulma/css/bulma.css';
 
 const languages = ['Clojure', 'Elixir', 'Go', 'Rust'];
 const frequencies = ['Daily', 'Weekly', 'Monthly'];
+const projects = [
+  {
+    name: 'Trendcat',
+    author: 'Foobar',
+    language: 'Go',
+    url: 'http://www.foobar.com',
+    stars: 900,
+  },
+  {
+    name: 'Football Maniacs',
+    author: 'Baz',
+    language: 'Clojure',
+    url: 'http://www.clojure.com',
+    stars: 10,
+  },
+];
 
 function AddNewLangForm() {
   return (
-    <div class="level-left">
-      <div class="level-item">
-        <div class="field has-addons">
-          <p class="control">
-            <input class="input" type="text" placeholder="Add new language" />
+    <div className="level-left">
+      <div className="level-item">
+        <div className="field has-addons">
+          <p className="control">
+            <input
+              className="input"
+              type="text"
+              placeholder="Add new language"
+            />
           </p>
-          <p class="control">
-            <button class="button is-outlined">
-              <i class="fas fa-plus" />
+          <p className="control">
+            <button className="button is-outlined">
+              <i className="fas fa-plus" />
             </button>
           </p>
         </div>
@@ -29,7 +49,7 @@ function LanguagesContainer({languages, current}) {
   const langs = languages.map((val, key) => {
     return (
       <a
-        class={current === val ? 'button is-active' : 'button'}
+        className={current === val ? 'button is-active' : 'button'}
         href="#"
         key={key}>
         {val}
@@ -43,26 +63,25 @@ function LanguagesContainer({languages, current}) {
 function FrequencyContainer({frequencies, current}) {
   const freq = frequencies.map((val, key) => {
     return (
-      <p class="level-item">
+      <p key={key} className="level-item">
         <a
-          class={
+          className={
             current === val
               ? 'button is-small is-rounded is-active'
               : 'button is-small is-rounded'
           }
-          href="#"
-          key={key}>
+          href="#">
           {val}
         </a>
       </p>
     );
   });
 
-  return <div class="level-right">{freq}</div>;
+  return <div className="level-right">{freq}</div>;
 }
 
 function ProjectHeader({name}) {
-  return <p class="title">{name}</p>;
+  return <p className="title">{name}</p>;
 }
 
 function ProjectContent({project}) {
@@ -70,21 +89,21 @@ function ProjectContent({project}) {
     <div>
       <p>
         <span>
-          <i class="far fa-user" />
+          <i className="far fa-user" />
         </span>
         &nbsp;&nbsp;
         <span>{project.author}</span>
       </p>
       <p>
         <span>
-          <i class="devicon-go-line colored" />
+          <i className="devicon-go-line colored" />
         </span>
         &nbsp;&nbsp;
         <span>{project.language}</span>
       </p>
       <p>
         <span>
-          <i class="fas fa-link" />
+          <i className="fas fa-link" />
         </span>
         &nbsp;&nbsp;
         <span>
@@ -93,9 +112,9 @@ function ProjectContent({project}) {
       </p>
       <p>
         <span>
-          &nbsp;&nbsp;
-          <i class="far fa-star" />
+          <i className="far fa-star" />
         </span>
+        &nbsp;&nbsp;
         <span>{project.stars}</span>
       </p>
     </div>
@@ -104,17 +123,17 @@ function ProjectContent({project}) {
 
 function ProjectFooter() {
   return (
-    <footer class="card-footer">
-      <p class="card-footer-item">
+    <footer className="card-footer">
+      <p className="card-footer-item">
         <span>
           <a href="">
-            <i class="fas fa-heart" />
+            <i className="fas fa-heart" />
           </a>
         </span>
         &nbsp; &nbsp;
         <span>
           <a href="">
-            <i class="fas fa-trash" />
+            <i className="fas fa-trash" />
           </a>
         </span>
       </p>
@@ -122,20 +141,13 @@ function ProjectFooter() {
   );
 }
 
-function Project() {
-  const _project = {
-    author: 'Foobar',
-    language: 'Go',
-    url: 'http://www.foobar.com',
-    stars: 900,
-  };
-
+function Project(project) {
   return (
-    <div class="column">
-      <div class="card">
-        <div class="card-content">
-          <ProjectHeader name="Trendcat" />
-          <ProjectContent project={_project} />
+    <div className="column">
+      <div className="card">
+        <div className="card-content">
+          <ProjectHeader name={project.name} />
+          <ProjectContent project={project} />
         </div>
         <ProjectFooter />
       </div>
@@ -143,34 +155,53 @@ function Project() {
   );
 }
 
-function ProjectsContainer() {
-  return (
-    <div class="columns">
-      <Project />
-      <Project />
-    </div>
-  );
+function ProjectsContainer({projects}) {
+  const _projects = projects.map((project, key) => {
+    return <Project key={key} {...project} />;
+  });
+
+  return <div className="columns">{_projects}</div>;
 }
 
-function MainNavbar() {
+function MainNavbar(props) {
   return (
-    <nav class="level">
+    <nav className="level">
       <AddNewLangForm />
-      <LanguagesContainer languages={languages} current="Clojure" />
-      <FrequencyContainer frequencies={frequencies} current="Daily" />
+      <LanguagesContainer languages={props.languages} current="Clojure" />
+      <FrequencyContainer frequencies={props.frequencies} current="Daily" />
     </nav>
   );
 }
 
 class NewApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      languages: languages,
+      frequencies: frequencies,
+      projects: projects,
+    };
+    this.handleAddNewLanguage = this.handleAddNewLanguage.bind(this);
+    this.handleChangeFrequency = this.handleChangeFrequency.bind(this);
+  }
+
+  handleAddNewLanguage() {}
+
+  handleChangeFrequency() {}
+
   render() {
+    const navbarProps = {
+      languages: this.state.languages,
+      frequencies: this.state.frequencies,
+    };
+
     return (
       <div className="App">
         <div className="block" />
         <div className="container">
-          <MainNavbar />
-          <div class="block" />
-          <ProjectsContainer />
+          <MainNavbar {...navbarProps} />
+          <div className="block" />
+          <ProjectsContainer projects={this.state.projects} />
         </div>
       </div>
     );
