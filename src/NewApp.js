@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import 'bulma/css/bulma.css';
 //import AddLanguageFormWithHooks from './components/AddLanguageFormWithHooks';
 //import Explorer from './components/Explorer';
+
+const languages = ['Clojure', 'Elixir', 'Go', 'Rust'];
+const frequencies = ['Daily', 'Weekly', 'Monthly'];
+
 function AddNewLangForm() {
   return (
     <div class="level-left">
@@ -21,24 +25,30 @@ function AddNewLangForm() {
   );
 }
 
-function LanguagesContainer() {
-  return <div>LanguagesContainer</div>;
+function LanguagesContainer({languages}) {
+  const langs = languages.map((val, key) => {
+    return (
+      <a href="#" key={key}>
+        {val}
+      </a>
+    );
+  });
+
+  return <div>{langs}</div>;
 }
 
-function FrequencyContainer() {
-  return (
-    <div class="level-right">
+function FrequencyContainer({frequencies}) {
+  const freq = frequencies.map((val, key) => {
+    return (
       <p class="level-item">
-        <strong>Daily</strong>
+        <a href="#" key={key}>
+          {val}
+        </a>
       </p>
-      <p class="level-item">
-        <a>Weekly</a>
-      </p>
-      <p class="level-item">
-        <a>Monthly</a>
-      </p>
-    </div>
-  );
+    );
+  });
+
+  return <div class="level-right">{freq}</div>;
 }
 
 function Project() {
@@ -103,17 +113,23 @@ function ProjectsContainer() {
   );
 }
 
+function MainNavbar() {
+  return (
+    <nav class="level">
+      <AddNewLangForm />
+      <LanguagesContainer languages={languages} />
+      <FrequencyContainer frequencies={frequencies} />
+    </nav>
+  );
+}
+
 class NewApp extends Component {
   render() {
     return (
       <div className="App">
         <div className="block" />
         <div className="container">
-          <nav class="level">
-            <AddNewLangForm />
-            <LanguagesContainer />
-            <FrequencyContainer />
-          </nav>
+          <MainNavbar />
           <div class="block" />
           <ProjectsContainer />
         </div>
