@@ -61,54 +61,83 @@ function FrequencyContainer({frequencies, current}) {
   return <div class="level-right">{freq}</div>;
 }
 
+function ProjectHeader({name}) {
+  return <p class="title">{name}</p>;
+}
+
+function ProjectContent({project}) {
+  return (
+    <div>
+      <p>
+        <span>
+          <i class="far fa-user" />
+        </span>
+        &nbsp;&nbsp;
+        <span>{project.author}</span>
+      </p>
+      <p>
+        <span>
+          <i class="devicon-go-line colored" />
+        </span>
+        &nbsp;&nbsp;
+        <span>{project.language}</span>
+      </p>
+      <p>
+        <span>
+          <i class="fas fa-link" />
+        </span>
+        &nbsp;&nbsp;
+        <span>
+          <a href="foobar.com">{project.url}</a>
+        </span>
+      </p>
+      <p>
+        <span>
+          &nbsp;&nbsp;
+          <i class="far fa-star" />
+        </span>
+        <span>{project.stars}</span>
+      </p>
+    </div>
+  );
+}
+
+function ProjectFooter() {
+  return (
+    <footer class="card-footer">
+      <p class="card-footer-item">
+        <span>
+          <a href="">
+            <i class="fas fa-heart" />
+          </a>
+        </span>
+        &nbsp; &nbsp;
+        <span>
+          <a href="">
+            <i class="fas fa-trash" />
+          </a>
+        </span>
+      </p>
+    </footer>
+  );
+}
+
 function Project() {
+  const _project = {
+    author: 'Foobar',
+    language: 'Go',
+    url: 'http://www.foobar.com',
+    stars: 900,
+  };
+
   return (
     <div class="column">
       <div class="card">
         <div class="card-content">
-          <p class="title">Trendcat</p>
-          <p>
-            <span>
-              <i class="far fa-user" />
-            </span>
-            <span>Foobar</span>
-          </p>
-          <p>
-            <span>
-              <i class="devicon-go-line colored" />
-            </span>
-            <span>Golang</span>
-          </p>
-          <p>
-            <span>
-              <i class="fas fa-link" />
-            </span>
-            <span>
-              <a href="foobar.com">http://www.foobar.com</a>
-            </span>
-          </p>
-          <p>
-            <span>
-              <i class="far fa-star" />
-            </span>
-            <span>900</span>
-          </p>
+          <ProjectHeader name="Trendcat" />
+          <ProjectContent project={_project} />
         </div>
-        <footer class="card-footer">
-          <p class="card-footer-item">
-            <span>
-              <a href="">
-                <i class="fas fa-heart" />
-              </a>
-            </span>
-            &nbsp; &nbsp;
-            <span>
-              <a href="">
-                <i class="fas fa-trash" />
-              </a>
-            </span>
-          </p>
-        </footer>
+        <ProjectFooter />
       </div>
     </div>
   );
