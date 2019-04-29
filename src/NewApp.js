@@ -68,12 +68,11 @@ function LanguagesContainer({languages, current}) {
 
   const langs = languages.map((val, key) => {
     return (
-      <a
+      <button
         className={current === val ? 'button is-active' : 'button'}
-        href="#"
         key={key}>
         {val}
-      </a>
+      </button>
     );
   });
 
@@ -89,15 +88,14 @@ function FrequencyContainer({frequencies, current}) {
   const freq = frequencies.map((val, key) => {
     return (
       <p key={key} className="level-item">
-        <a
+        <button
           className={
             current === val
               ? 'button is-small is-rounded is-active'
               : 'button is-small is-rounded'
-          }
-          href="#">
+          }>
           {val}
-        </a>
+        </button>
       </p>
     );
   });
@@ -151,15 +149,15 @@ function ProjectFooter() {
     <footer className="card-footer">
       <p className="card-footer-item">
         <span>
-          <a href="">
+          <button>
             <i className="fas fa-heart" />
-          </a>
+          </button>
         </span>
         &nbsp; &nbsp;
         <span>
-          <a href="">
+          <button>
             <i className="fas fa-trash" />
-          </a>
+          </button>
         </span>
       </p>
     </footer>
