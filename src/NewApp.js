@@ -25,10 +25,13 @@ function AddNewLangForm() {
   );
 }
 
-function LanguagesContainer({languages}) {
+function LanguagesContainer({languages, current}) {
   const langs = languages.map((val, key) => {
     return (
-      <a href="#" key={key}>
+      <a
+        class={current === val ? 'button is-active' : 'button'}
+        href="#"
+        key={key}>
         {val}
       </a>
     );
@@ -37,11 +40,18 @@ function LanguagesContainer({languages}) {
   return <div>{langs}</div>;
 }
 
-function FrequencyContainer({frequencies}) {
+function FrequencyContainer({frequencies, current}) {
   const freq = frequencies.map((val, key) => {
     return (
       <p class="level-item">
-        <a href="#" key={key}>
+        <a
+          class={
+            current === val
+              ? 'button is-small is-rounded is-active'
+              : 'button is-small is-rounded'
+          }
+          href="#"
+          key={key}>
           {val}
         </a>
       </p>
@@ -117,8 +127,8 @@ function MainNavbar() {
   return (
     <nav class="level">
       <AddNewLangForm />
-      <LanguagesContainer languages={languages} />
-      <FrequencyContainer frequencies={frequencies} />
+      <LanguagesContainer languages={languages} current="Clojure" />
+      <FrequencyContainer frequencies={frequencies} current="Daily" />
     </nav>
   );
 }
