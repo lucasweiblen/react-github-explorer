@@ -1,8 +1,6 @@
 import React, {Component, useState} from 'react';
 import 'bulma/css/bulma.css';
 import axios from 'axios';
-//import AddLanguageFormWithHooks from './components/AddLanguageFormWithHooks';
-//import Explorer from './components/Explorer';
 
 const languages = ['Clojure', 'Elixir', 'Go', 'Rust'];
 const frequencies = ['Daily', 'Weekly', 'Monthly'];
@@ -96,12 +94,13 @@ function LanguagesContainer({languages, current, onChangeLanguage}) {
   );
 }
 
-function FrequencyContainer({frequencies, current}) {
+function FrequencyContainer({frequencies, current, onChangeFrequency}) {
   const [currentFrequency, setCurrentFrequency] = useState(current);
 
   const handleCurrentFrequency = e => {
     console.log(e.target.textContent);
     setCurrentFrequency(e.target.textContent);
+    onChangeFrequency(e.target.textContent);
   };
 
   const freq = frequencies.map((val, key) => {
@@ -199,8 +198,6 @@ function Project(project) {
 }
 
 function ProjectsContainer({projects}) {
-  //const [_projects_, setProjects] = useState(projects);
-
   const _projects = projects.map((project, key) => {
     return <Project key={key} {...project} />;
   });
@@ -214,6 +211,11 @@ function MainNavbar(props) {
     props.onChangeLanguage(language);
   };
 
+  const handleChangeFrequency = frequency => {
+    console.log(`MainNavBar -> frequency: ${frequency}`);
+    props.onChangeFrequency(frequency);
+  };
+
   return (
     <nav className="level">
       <LanguagesContainer
@@ -221,7 +223,11 @@ function MainNavbar(props) {
         languages={props.languages}
         current="Clojure"
       />
-      <FrequencyContainer frequencies={props.frequencies} current="Daily" />
+      <FrequencyContainer
+        onChangeFrequency={handleChangeFrequency}
+        frequencies={props.frequencies}
+        current="Daily"
+      />
     </nav>
   );
 }
@@ -233,17 +239,18 @@ class NewApp extends Component {
       languages: languages,
       frequencies: frequencies,
       projects: projects,
+      currentLanguage: '',
     };
     this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
+    this.handleChangeFrequency = this.handleChangeFrequency.bind(this);
   }
 
-  fetchRepos(language) {
-    console.log(`Fetching repos for ${language}`);
-    const url = `https://github-trending-api.now.sh/repositories?language=${language.toLowerCase()}`;
+  fetchRepos(language, frequency = 'Daily') {
+    console.log(`Fetching repos for ${language}, frequency: ${frequency}`);
+    const url = `https://github-trending-api.now.sh/repositories?language=${language.toLowerCase()}&since=${frequency.toLowerCase()}`;
     axios
       .get(url)
       .then(response => {
-        //setRepos(response.data);
         this.setState({projects: response.data});
       })
       .catch(error => {
@@ -253,7 +260,13 @@ class NewApp extends Component {
 
   handleChangeLanguage(language) {
     console.log(`NewApp -> language: ${language}`);
+    this.setState({currentLanguage: language});
     this.fetchRepos(language);
+  }
+
+  handleChangeFrequency(frequency) {
+    console.log(`NewApp -> frequency: ${frequency}`);
+    this.fetchRepos(this.state.currentLanguage, frequency);
   }
 
   render() {
@@ -261,6 +274,7 @@ class NewApp extends Component {
       languages: this.state.languages,
       frequencies: this.state.frequencies,
       onChangeLanguage: this.handleChangeLanguage,
+      onChangeFrequency: this.handleChangeFrequency,
     };
 
     return (
