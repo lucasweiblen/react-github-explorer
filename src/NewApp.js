@@ -28,11 +28,10 @@ const AddLanguageForm = ({addLanguageHandler}) => {
     setLanguage(e.target.value);
   };
 
-  const handleSubmit = e => {
+  const handleClick = e => {
     if (language !== '') {
       console.log(`AddLanguageForm -> adding new language: ${language}`);
       addLanguageHandler({language});
-      e.preventDefault();
     }
   };
 
@@ -40,33 +39,39 @@ const AddLanguageForm = ({addLanguageHandler}) => {
     <div className="level-left">
       <div className="level-item">
         <div className="field has-addons">
-          <form onSubmit={handleSubmit}>
-            <p className="control">
-              <input
-                className="input"
-                type="text"
-                value={language}
-                onChange={handleChange}
-                placeholder="Add new language"
-              />
-              <button type="submit" className="button is-outlined">
-                <i className="fas fa-plus" />
-              </button>
-            </p>
-          </form>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              value={language}
+              onChange={handleChange}
+              placeholder="Add new language"
+            />
+          </div>
+          <div className="control">
+            <button onClick={handleClick} className="button is-outlined">
+              <i className="fas fa-plus" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-function LanguagesContainer({languages, current, onChangeLanguage}) {
+function LanguagesContainer({
+  languages,
+  current,
+  onChangeLanguage,
+  onAddLanguage,
+}) {
   const [langs, setLanguages] = useState(languages);
   const [curr, setCurrent] = useState(current);
 
   const handleAddNewLanguage = ({language}) => {
     console.log(`LanguagesContainer -> adding new language ${language}`);
-    setLanguages([...languages, language]);
+    setLanguages([...langs, language]);
+    onAddLanguage(language); // need to check later if its necessary or not
   };
 
   const handleCurrentLanguage = e => {
@@ -211,6 +216,11 @@ function MainNavbar(props) {
     props.onChangeLanguage(language);
   };
 
+  const handleAddLanguage = language => {
+    console.log(`MainNavBar -> language: ${language}`);
+    props.onAddLanguage(language);
+  };
+
   const handleChangeFrequency = frequency => {
     console.log(`MainNavBar -> frequency: ${frequency}`);
     props.onChangeFrequency(frequency);
@@ -220,6 +230,7 @@ function MainNavbar(props) {
     <nav className="level">
       <LanguagesContainer
         onChangeLanguage={handleChangeLanguage}
+        onAddLanguage={handleAddLanguage}
         languages={props.languages}
         current="Clojure"
       />
@@ -242,6 +253,7 @@ class NewApp extends Component {
       currentLanguage: '',
     };
     this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
+    this.handleAddLanguage = this.handleAddLanguage.bind(this);
     this.handleChangeFrequency = this.handleChangeFrequency.bind(this);
   }
 
@@ -264,6 +276,13 @@ class NewApp extends Component {
     this.fetchRepos(language);
   }
 
+  handleAddLanguage(language) {
+    console.log(`NewApp -> language: ${language}`);
+    //console.log(this.state.languages);
+    //this.setState({languages: []});
+    //console.log(this.state.languages);
+  }
+
   handleChangeFrequency(frequency) {
     console.log(`NewApp -> frequency: ${frequency}`);
     this.fetchRepos(this.state.currentLanguage, frequency);
@@ -273,6 +292,7 @@ class NewApp extends Component {
     const navbarProps = {
       languages: this.state.languages,
       frequencies: this.state.frequencies,
+      onAddLanguage: this.handleAddLanguage,
       onChangeLanguage: this.handleChangeLanguage,
       onChangeFrequency: this.handleChangeFrequency,
     };
