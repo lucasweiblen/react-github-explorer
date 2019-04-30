@@ -61,7 +61,7 @@ const AddLanguageForm = ({addLanguageHandler}) => {
   );
 };
 
-function LanguagesContainer({languages, current}) {
+function LanguagesContainer({languages, current, onChangeLanguage}) {
   const [langs, setLanguages] = useState(languages);
   const [curr, setCurrent] = useState(current);
 
@@ -70,9 +70,10 @@ function LanguagesContainer({languages, current}) {
     setLanguages([...languages, language]);
   };
 
-  const handleCurrLanguage = e => {
+  const handleCurrentLanguage = e => {
     console.log(e.target.textContent);
     setCurrent(e.target.textContent);
+    onChangeLanguage(e.target.textContent);
   };
 
   const _langs = langs.map((val, key) => {
@@ -80,7 +81,7 @@ function LanguagesContainer({languages, current}) {
       <button
         className={curr === val ? 'button is-active' : 'button'}
         key={key}
-        onClick={handleCurrLanguage}>
+        onClick={handleCurrentLanguage}>
         {val}
       </button>
     );
@@ -197,6 +198,8 @@ function Project(project) {
 }
 
 function ProjectsContainer({projects}) {
+  //const [_projects_, setProjects] = useState(projects);
+
   const _projects = projects.map((project, key) => {
     return <Project key={key} {...project} />;
   });
@@ -205,9 +208,18 @@ function ProjectsContainer({projects}) {
 }
 
 function MainNavbar(props) {
+  const handleChangeLanguage = language => {
+    console.log(`MainNavBar -> language: ${language}`);
+    props.onChangeLanguage(language);
+  };
+
   return (
     <nav className="level">
-      <LanguagesContainer languages={props.languages} current="Clojure" />
+      <LanguagesContainer
+        onChangeLanguage={handleChangeLanguage}
+        languages={props.languages}
+        current="Clojure"
+      />
       <FrequencyContainer frequencies={props.frequencies} current="Daily" />
     </nav>
   );
@@ -221,18 +233,18 @@ class NewApp extends Component {
       frequencies: frequencies,
       projects: projects,
     };
-    this.handleAddNewLanguage = this.handleAddNewLanguage.bind(this);
-    this.handleChangeFrequency = this.handleChangeFrequency.bind(this);
+    this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
   }
 
-  handleAddNewLanguage() {}
-
-  handleChangeFrequency() {}
+  handleChangeLanguage(language) {
+    console.log(`NewApp -> language: ${language}`);
+  }
 
   render() {
     const navbarProps = {
       languages: this.state.languages,
       frequencies: this.state.frequencies,
+      onChangeLanguage: this.handleChangeLanguage,
     };
 
     return (
