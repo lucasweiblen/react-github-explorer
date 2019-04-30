@@ -63,17 +63,24 @@ const AddLanguageForm = ({addLanguageHandler}) => {
 
 function LanguagesContainer({languages, current}) {
   const [langs, setLanguages] = useState(languages);
+  const [curr, setCurrent] = useState(current);
 
   const handleAddNewLanguage = ({language}) => {
     console.log(`LanguagesContainer -> adding new language ${language}`);
     setLanguages([...languages, language]);
   };
 
+  const handleCurrLanguage = e => {
+    console.log(e.target.textContent);
+    setCurrent(e.target.textContent);
+  };
+
   const _langs = langs.map((val, key) => {
     return (
       <button
-        className={current === val ? 'button is-active' : 'button'}
-        key={key}>
+        className={curr === val ? 'button is-active' : 'button'}
+        key={key}
+        onClick={handleCurrLanguage}>
         {val}
       </button>
     );
