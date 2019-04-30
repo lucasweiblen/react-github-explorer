@@ -1,5 +1,6 @@
 import React, {Component, useState} from 'react';
 import 'bulma/css/bulma.css';
+import axios from 'axios';
 //import AddLanguageFormWithHooks from './components/AddLanguageFormWithHooks';
 //import Explorer from './components/Explorer';
 
@@ -236,8 +237,23 @@ class NewApp extends Component {
     this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
   }
 
+  fetchRepos(language) {
+    console.log(`Fetching repos for ${language}`);
+    const url = `https://github-trending-api.now.sh/repositories?language=${language.toLowerCase()}`;
+    axios
+      .get(url)
+      .then(response => {
+        //setRepos(response.data);
+        this.setState({projects: response.data});
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   handleChangeLanguage(language) {
     console.log(`NewApp -> language: ${language}`);
+    this.fetchRepos(language);
   }
 
   render() {
