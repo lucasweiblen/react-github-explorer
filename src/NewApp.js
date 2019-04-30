@@ -95,12 +95,20 @@ function LanguagesContainer({languages, current}) {
 }
 
 function FrequencyContainer({frequencies, current}) {
+  const [currentFrequency, setCurrentFrequency] = useState(current);
+
+  const handleCurrentFrequency = e => {
+    console.log(e.target.textContent);
+    setCurrentFrequency(e.target.textContent);
+  };
+
   const freq = frequencies.map((val, key) => {
     return (
       <p key={key} className="level-item">
         <button
+          onClick={handleCurrentFrequency}
           className={
-            current === val
+            currentFrequency === val
               ? 'button is-small is-rounded is-active'
               : 'button is-small is-rounded'
           }>
