@@ -40,9 +40,7 @@ class NewApp extends Component {
 
   handleAddLanguage(language) {
     console.log(`NewApp -> language: ${language}`);
-    //console.log(this.state.languages);
-    //this.setState({languages: []});
-    //console.log(this.state.languages);
+    this.setState({languages: [...this.state.languages, language]});
   }
 
   handleChangeFrequency(frequency) {

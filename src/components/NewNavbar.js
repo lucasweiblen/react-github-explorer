@@ -9,10 +9,10 @@ const NewNavBar = props => {
     props.onChangeLanguage(language);
   };
 
-  //const handleAddLanguage = language => {
-  //console.log(`NewNavBar -> language: ${language}`);
-  //props.onAddLanguage(language);
-  //};
+  const handleAddLanguage = language => {
+    console.log(`NewNavBar -> language: ${language}`);
+    props.onAddLanguage(language);
+  };
 
   const handleChangeFrequency = frequency => {
     console.log(`NewNavBar -> frequency: ${frequency}`);
@@ -22,7 +22,10 @@ const NewNavBar = props => {
   return (
     <div className="level">
       <div className="level-left">
-        <AddLangForm />
+        <AddLangForm
+          languages={props.languages}
+          onAddLanguage={handleAddLanguage}
+        />
       </div>
       <div className="level-item">
         <LangContainer
