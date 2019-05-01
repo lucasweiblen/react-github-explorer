@@ -41,25 +41,33 @@ function ProjectContent({project}) {
   );
 }
 
-function ProjectFooter() {
+const ProjectFooter = () => {
+  const handleLikeProject = e => {
+    console.log('Like project');
+  };
+
+  const handleDislikeProject = e => {
+    console.log('DisLike project');
+  };
+
   return (
     <footer className="card-footer">
       <p className="card-footer-item">
         <span>
-          <button>
+          <a onClick={handleLikeProject}>
             <i className="fas fa-heart" />
-          </button>
+          </a>
         </span>
         &nbsp; &nbsp;
         <span>
-          <button>
+          <a onClick={handleDislikeProject}>
             <i className="fas fa-trash" />
-          </button>
+          </a>
         </span>
       </p>
     </footer>
   );
-}
+};
 
 function Project(project) {
   return (
