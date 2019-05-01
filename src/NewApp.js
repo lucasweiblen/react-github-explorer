@@ -28,7 +28,7 @@ const AddLanguageForm = ({addLanguageHandler}) => {
     setLanguage(e.target.value);
   };
 
-  const handleClick = e => {
+  const handleClick = () => {
     if (language !== '') {
       console.log(`AddLanguageForm -> adding new language: ${language}`);
       addLanguageHandler({language});
@@ -91,10 +91,12 @@ function LanguagesContainer({
     );
   });
 
+  // style -> marginLeft -> hacking for the moment
   return (
     <div>
       <AddLanguageForm addLanguageHandler={handleAddNewLanguage} />
-      {_langs}
+      <br />
+      <div style={{marginLeft: 500}}>{_langs}</div>
     </div>
   );
 }
