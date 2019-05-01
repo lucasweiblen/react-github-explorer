@@ -245,6 +245,61 @@ function MainNavbar(props) {
   );
 }
 
+const AddLangForm = () => {
+  return (
+    <div>
+      <div class="field has-addons">
+        <div class="control">
+          <input className="input" type="text" placeholder="Add new language" />
+        </div>
+        <div class="control">
+          <button className="button is-outlined">
+            <i className="fas fa-plus" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const LangContainer = () => {
+  const _langs = languages.map((language, key) => {
+    return (
+      <button className="button" key={key}>
+        {language}
+      </button>
+    );
+  });
+  return <div>{_langs}</div>;
+};
+
+const FreqContainer = () => {
+  const _freq = frequencies.map((frequency, key) => {
+    return (
+      <button className="button" key={key}>
+        {frequency}
+      </button>
+    );
+  });
+  return <div>{_freq}</div>;
+};
+
+const NewNavBar = () => {
+  return (
+    <div class="level">
+      <div class="level-left">
+        <AddLangForm />
+      </div>
+      <div class="level-item">
+        <LangContainer />
+      </div>
+      <div class="level-right">
+        <FreqContainer />
+      </div>
+    </div>
+  );
+};
+
 class NewApp extends Component {
   constructor(props) {
     super(props);
@@ -303,6 +358,8 @@ class NewApp extends Component {
       <div className="App">
         <div className="block" />
         <div className="container">
+          <NewNavBar />
+          <div className="block" />
           <MainNavbar {...navbarProps} />
           <div className="block" />
           <ProjectsContainer projects={this.state.projects} />
