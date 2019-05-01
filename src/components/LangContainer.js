@@ -1,10 +1,20 @@
-import React from 'react';
-import {languages} from './../const';
+import React, {useState} from 'react';
 
-const LangContainer = () => {
-  const _langs = languages.map((language, key) => {
+const LangContainer = ({languages, current, onChangeLanguage}) => {
+  const [_languages, setLanguages] = useState(languages);
+  const [_current, setCurrent] = useState(current);
+
+  const handleCurrentLanguage = e => {
+    console.log(e.target.textContent);
+    setCurrent(e.target.textContent);
+    onChangeLanguage(e.target.textContent);
+  };
+
+  const _langs = _languages.map((language, key) => {
+    const _btnClass = _current === language ? 'button is-active' : 'button';
+
     return (
-      <button className="button" key={key}>
+      <button className={_btnClass} key={key} onClick={handleCurrentLanguage}>
         {language}
       </button>
     );

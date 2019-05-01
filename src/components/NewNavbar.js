@@ -4,16 +4,39 @@ import LangContainer from './LangContainer';
 import FreqContainer from './FreqContainer';
 
 const NewNavBar = props => {
+  const handleChangeLanguage = language => {
+    console.log(`NewNavBar -> language: ${language}`);
+    props.onChangeLanguage(language);
+  };
+
+  //const handleAddLanguage = language => {
+  //console.log(`NewNavBar -> language: ${language}`);
+  //props.onAddLanguage(language);
+  //};
+
+  const handleChangeFrequency = frequency => {
+    console.log(`NewNavBar -> frequency: ${frequency}`);
+    props.onChangeFrequency(frequency);
+  };
+
   return (
-    <div class="level">
-      <div class="level-left">
+    <div className="level">
+      <div className="level-left">
         <AddLangForm />
       </div>
-      <div class="level-item">
-        <LangContainer />
+      <div className="level-item">
+        <LangContainer
+          onChangeLanguage={handleChangeLanguage}
+          languages={props.languages}
+          current="Clojure"
+        />
       </div>
-      <div class="level-right">
-        <FreqContainer />
+      <div className="level-right">
+        <FreqContainer
+          onChangeFrequency={handleChangeFrequency}
+          frequencies={props.frequencies}
+          current="Daily"
+        />
       </div>
     </div>
   );
