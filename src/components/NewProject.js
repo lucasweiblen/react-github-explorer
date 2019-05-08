@@ -12,7 +12,7 @@ const NewProject = project => {
               <p>
                 <strong>{project.name}</strong>
               </p>
-              <p>{project.description}</p>
+              <p style={{height: '60px'}}>{project.description}</p>
 
               <p>
                 <span>
@@ -34,7 +34,7 @@ const NewProject = project => {
                 &nbsp;&nbsp;
                 {project.language}
               </p>
-              <p>
+              <p style={{height: '48px'}}>
                 <span>
                   <i className="fas fa-link" />
                 </span>
