@@ -31,7 +31,7 @@ const NewNavBar = props => {
         <LangContainer
           onChangeLanguage={handleChangeLanguage}
           languages={props.languages}
-          current="Clojure"
+          current={props.currentLanguage}
         />
       </div>
       <div className="level-right">

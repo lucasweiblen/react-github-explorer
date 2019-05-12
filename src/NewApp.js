@@ -11,12 +11,16 @@ class NewApp extends Component {
     this.state = {
       languages: languages,
       frequencies: frequencies,
-      projects: projects,
-      currentLanguage: '',
+      projects: [],
+      currentLanguage: languages[0],
     };
     this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
     this.handleAddLanguage = this.handleAddLanguage.bind(this);
     this.handleChangeFrequency = this.handleChangeFrequency.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchRepos(this.state.currentLanguage);
   }
 
   fetchRepos(language, frequency = 'Daily') {
@@ -52,6 +56,7 @@ class NewApp extends Component {
     const navbarProps = {
       languages: this.state.languages,
       frequencies: this.state.frequencies,
+      currentLanguage: this.state.currentLanguage,
       onAddLanguage: this.handleAddLanguage,
       onChangeLanguage: this.handleChangeLanguage,
       onChangeFrequency: this.handleChangeFrequency,
