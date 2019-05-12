@@ -12,7 +12,15 @@ const NewProject = project => {
               <p>
                 <strong>{project.name}</strong>
               </p>
-              <p style={{height: '60px'}}>{project.description}</p>
+              <p
+                className="description"
+                style={{
+                  display: 'block',
+                  minHeight: '48px',
+                  overflow: 'hidden',
+                }}>
+                {project.description}
+              </p>
 
               <p>
                 <span>
