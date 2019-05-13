@@ -4,6 +4,7 @@ import axios from 'axios';
 import NewNavBar from './components/NewNavbar';
 import ProjectsContainer from './components/ProjectsContainer';
 import {languages, frequencies, projects} from './const';
+import Login from './components/Login';
 
 class NewApp extends Component {
   constructor(props) {
@@ -70,6 +71,7 @@ class NewApp extends Component {
           <div className="block" />
           <ProjectsContainer projects={this.state.projects} />
         </div>
+        <Login />
       </div>
     );
   }
