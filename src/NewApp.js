@@ -5,6 +5,7 @@ import NewNavBar from './components/NewNavbar';
 import ProjectsContainer from './components/ProjectsContainer';
 import {languages, frequencies, projects} from './const';
 import Login from './components/Login';
+import {Link, Router} from '@reach/router';
 
 class NewApp extends Component {
   constructor(props) {
@@ -63,15 +64,30 @@ class NewApp extends Component {
       onChangeFrequency: this.handleChangeFrequency,
     };
 
+    const Home = () => {
+      return (
+        <div>
+          <div className="block" />
+          <div className="container">
+            <NewNavBar {...navbarProps} />
+            <div className="block" />
+            <ProjectsContainer projects={this.state.projects} />
+          </div>
+        </div>
+      );
+    };
+
     return (
       <div className="App">
-        <div className="block" />
-        <div className="container">
-          <NewNavBar {...navbarProps} />
-          <div className="block" />
-          <ProjectsContainer projects={this.state.projects} />
-        </div>
-        <Login />
+        <nav className="container">
+          <Link to="/">Home</Link>
+          &nbsp;
+          <Link to="login">Login</Link>
+        </nav>
+        <Router>
+          <Home path="/" />
+          <Login path="/login" />
+        </Router>
       </div>
     );
   }

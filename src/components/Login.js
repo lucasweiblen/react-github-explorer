@@ -58,70 +58,71 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      {loggedIn ? 'Logged in' : 'Not logged in'}
-      <div className="field">
-        <div className="control has-icons-left">
-          <input
-            className="input"
-            type="text"
-            placeholder="Username"
-            onChange={handleUsername}
-            value={username}
-          />
-          <span className="icon is-small is-left">
-            <i className="fas fa-user" />
-          </span>
-        </div>
-      </div>
-
-      <div className="field">
-        <div className="control has-icons-left">
-          <input
-            className={validEmail ? 'input' : 'input is-danger'}
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={handleEmail}
-          />
-          <span className="icon is-small is-left">
-            <i className="fas fa-envelope" />
-          </span>
-          {!validEmail ? (
-            <span className="icon is-small is-right">
-              <i className="fas fa-exclamation-triangle" />
-            </span>
-          ) : (
-            ''
-          )}
-        </div>
-        {!validEmail ? (
-          <p className="help is-danger">This email is invalid</p>
-        ) : (
-          ''
-        )}
-      </div>
-
-      <div className="field">
-        <div className="control has-icons-left">
-          <input
-            className="input"
-            type="password"
-            placeholder="Password"
-            onChange={handlePassword}
-            value={password}
-          />
-          <span className="icon is-small is-left">
-            <i className="fas fa-key" />
-          </span>
-        </div>
-      </div>
-
-      <div className="field">
-        <div className="control">
-          <button className="button is-link" onClick={handleClick}>
-            Login
-          </button>
+    <div className="container login">
+      <div class="columns is-mobile is-centered">
+        <div class="column is-half">
+          {loggedIn ? 'Logged in' : 'Not logged in'}
+          <div className="field">
+            <div className="control has-icons-left">
+              <input
+                className="input"
+                type="text"
+                placeholder="Username"
+                onChange={handleUsername}
+                value={username}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-user" />
+              </span>
+            </div>
+          </div>
+          <div className="field">
+            <div className="control has-icons-left">
+              <input
+                className={validEmail ? 'input' : 'input is-danger'}
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={handleEmail}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-envelope" />
+              </span>
+              {!validEmail ? (
+                <span className="icon is-small is-right">
+                  <i className="fas fa-exclamation-triangle" />
+                </span>
+              ) : (
+                ''
+              )}
+            </div>
+            {!validEmail ? (
+              <p className="help is-danger">This email is invalid</p>
+            ) : (
+              ''
+            )}
+          </div>
+          <div className="field">
+            <div className="control has-icons-left">
+              <input
+                className="input"
+                type="password"
+                placeholder="Password"
+                onChange={handlePassword}
+                value={password}
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-key" />
+              </span>
+            </div>
+          </div>
+          <div className="field">
+            <div className="control">
+              <button className="button is-link" onClick={handleClick}>
+                Login
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
