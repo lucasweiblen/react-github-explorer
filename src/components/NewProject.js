@@ -60,7 +60,7 @@ const NewProject = project => {
               </p>
             </div>
             <div className="level">
-              <a href="#" className="level-item level-right">
+              <a href="www.foobar.com" className="level-item level-right">
                 <span className="icon is-small">
                   <i className="fas fa-heart" />
                 </span>

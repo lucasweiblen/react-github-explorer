@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import './Login.css';
+import {redirectTo} from '@reach/router';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -10,7 +11,8 @@ const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const validateEmail = email => {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   };
 
@@ -24,8 +26,11 @@ const Login = () => {
         password: password,
       })
       .then(function(response) {
-        console.log(response);
+        //       console.log(response);
         if (response.status === 200) {
+          console.log(response.data);
+          const dataToBeStored = JSON.stringify(response.data);
+          localStorage.setItem('user', dataToBeStored);
           setLoggedIn(true);
         }
       })
@@ -59,8 +64,8 @@ const Login = () => {
 
   return (
     <div className="container login">
-      <div class="columns is-mobile is-centered">
-        <div class="column is-half">
+      <div className="columns is-mobile is-centered">
+        <div className="column is-half">
           {loggedIn ? 'Logged in' : 'Not logged in'}
           <div className="field">
             <div className="control has-icons-left">

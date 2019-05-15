@@ -3,7 +3,7 @@ import 'bulma/css/bulma.css';
 import axios from 'axios';
 import NewNavBar from './components/NewNavbar';
 import ProjectsContainer from './components/ProjectsContainer';
-import {languages, frequencies, projects} from './const';
+//import {languages, frequencies, projects} from './const';
 import Login from './components/Login';
 import {Link, Router} from '@reach/router';
 
@@ -11,10 +11,15 @@ class NewApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      languages: languages,
-      frequencies: frequencies,
+      //     languages: languages,
+      languages: '',
+      frequencies: ['Daily'],
       projects: [],
-      currentLanguage: languages[0],
+      //     currentLanguage: languages[0],
+      currentLanguage: '',
+      //loggedIn: false, // this will be setup according to the value on localStorage
+      loggedIn: false,
+      frequency: '',
     };
     this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
     this.handleAddLanguage = this.handleAddLanguage.bind(this);
@@ -22,7 +27,35 @@ class NewApp extends Component {
   }
 
   componentDidMount() {
-    this.fetchRepos(this.state.currentLanguage);
+    //this will be fetched only if user is logged in
+    const user = this.isLoggedIn();
+    if (user !== null) {
+      this.setState({
+        loggedIn: true,
+        languages: user.languages.toLowerCase().split(','),
+        frequency: user.frequency.toLowerCase(),
+        currentLanguage: user.favorite_language.toLowerCase(),
+      });
+      if (this.state.currentLanguage !== '') {
+        this.fetchRepos(this.state.currentLanguage);
+      }
+    } else {
+      console.log('NAO LOGADO');
+    }
+  }
+
+  isLoggedIn() {
+    if (localStorage.getItem('user') !== null) {
+      //     console.log('logged in');
+      const data = localStorage.getItem('user');
+      const userData = JSON.parse(data);
+      this.setState({loggedIn: true});
+      return userData;
+    } else {
+      //console.log('not logged in');
+      this.setState({loggedIn: false});
+      return null;
+    }
   }
 
   fetchRepos(language, frequency = 'Daily') {
@@ -55,6 +88,8 @@ class NewApp extends Component {
   }
 
   render() {
+    console.log(this.state);
+
     const navbarProps = {
       languages: this.state.languages,
       frequencies: this.state.frequencies,
@@ -65,6 +100,10 @@ class NewApp extends Component {
     };
 
     const Home = () => {
+      return <div>Home</div>;
+    };
+
+    const Projects = () => {
       return (
         <div>
           <div className="block" />
@@ -77,16 +116,36 @@ class NewApp extends Component {
       );
     };
 
+    const BookmarkedProjects = () => {
+      return <div>BookmarkedProjects</div>;
+    };
+
     return (
       <div className="App">
         <nav className="container">
-          <Link to="/">Home</Link>
-          &nbsp;
-          <Link to="login">Login</Link>
+          {this.state.loggedIn ? (
+            <div>
+              <Link className="button" to="/">
+                Home
+              </Link>
+              <Link className="button" to="projects">
+                Browse
+              </Link>
+              <Link className="button" to="bookmarked_projects">
+                My Bookmarked Projects
+              </Link>
+            </div>
+          ) : (
+            <Link className="button" to="login">
+              Login
+            </Link>
+          )}
         </nav>
         <Router>
           <Home path="/" />
           <Login path="/login" />
+          <Projects path="/projects" />
+          <BookmarkedProjects path="/bookmarked_projects" />
         </Router>
       </div>
     );
@@ -94,3 +153,17 @@ class NewApp extends Component {
 }
 
 export default NewApp;
+
+//return (
+//<div className="App">
+//<nav className="container">
+//<Link to="/">Home</Link>
+//&nbsp;
+//<Link to="login">Login</Link>
+//</nav>
+//<Router>
+//<Home path="/" />
+//<Login path="/login" />
+//</Router>
+//</div>
+//);
