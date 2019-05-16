@@ -48,7 +48,7 @@ const NewProject = project => {
                 </span>
                 &nbsp;&nbsp;
                 <span>
-                  <a href="foobar.com">{project.url}</a>
+                  <a href={project.url}>{project.url}</a>
                 </span>
               </p>
               <p>

@@ -84,8 +84,6 @@ class NewApp extends Component {
   }
 
   render() {
-    console.log(this.state);
-
     const navbarProps = {
       languages: this.state.languages,
       frequencies: this.state.frequencies,
