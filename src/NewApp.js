@@ -11,7 +11,7 @@ class NewApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      languages: '',
+      languages: [],
       frequencies: ['Daily'],
       projects: [],
       currentLanguage: '',
@@ -172,17 +172,3 @@ class NewApp extends Component {
 }
 
 export default NewApp;
-
-//return (
-//<div className="App">
-//<nav className="container">
-//<Link to="/">Home</Link>
-//&nbsp;
-//<Link to="login">Login</Link>
-//</nav>
-//<Router>
-//<Home path="/" />
-//<Login path="/login" />
-//</Router>
-//</div>
-//);
