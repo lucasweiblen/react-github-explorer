@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import 'bulma/css/bulma.css';
 import axios from 'axios';
 import NewNavBar from './components/NewNavbar';
@@ -11,13 +11,10 @@ class NewApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //     languages: languages,
       languages: '',
       frequencies: ['Daily'],
       projects: [],
-      //     currentLanguage: languages[0],
       currentLanguage: '',
-      //loggedIn: false, // this will be setup according to the value on localStorage
       loggedIn: false,
       frequency: '',
     };
@@ -46,13 +43,11 @@ class NewApp extends Component {
 
   isLoggedIn() {
     if (localStorage.getItem('user') !== null) {
-      //     console.log('logged in');
       const data = localStorage.getItem('user');
       const userData = JSON.parse(data);
       this.setState({loggedIn: true});
       return userData;
     } else {
-      //console.log('not logged in');
       this.setState({loggedIn: false});
       return null;
     }
@@ -116,8 +111,33 @@ class NewApp extends Component {
       );
     };
 
-    const BookmarkedProjects = () => {
-      return <div>BookmarkedProjects</div>;
+    const BookmarkedProjects = props => {
+      const id = props.id || 3;
+      const [bookmarkedProjects, setBookmarkedProjects] = useState([]);
+
+      const fetchBookmarkedProjects = () => {
+        const url = `http://localhost:1323/users/${id}/bookmarked_projects`;
+        return axios.get(url);
+      };
+
+      useEffect(() => {
+        let isSubscribed = true;
+        fetchBookmarkedProjects()
+          .then(response =>
+            isSubscribed ? setBookmarkedProjects(response.data) : null,
+          )
+          .catch(error => (isSubscribed ? console.log(error) : null));
+
+        return () => (isSubscribed = false);
+      }, []);
+
+      return (
+        <div>
+          {bookmarkedProjects.map(project => (
+            <div key={project.id}>{project.name}</div>
+          ))}
+        </div>
+      );
     };
 
     return (
