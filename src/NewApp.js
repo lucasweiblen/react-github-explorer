@@ -33,11 +33,12 @@ class NewApp extends Component {
         frequency: user.frequency.toLowerCase(),
         currentLanguage: user.favorite_language.toLowerCase(),
       });
-      if (this.state.currentLanguage !== '') {
-        this.fetchRepos(this.state.currentLanguage);
+      if (user.favorite_language) {
+        console.log('ok');
+        this.fetchRepos(user.favorite_language.toLowerCase());
       }
     } else {
-      console.log('NAO LOGADO');
+      console.log('Not logged!');
     }
   }
 
