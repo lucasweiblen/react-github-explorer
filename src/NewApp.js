@@ -132,10 +132,9 @@ class NewApp extends Component {
       }, []);
 
       return (
-        <div>
-          {bookmarkedProjects.map(project => (
-            <div key={project.id}>{project.name}</div>
-          ))}
+        <div className="container">
+          <div className="block" />
+          <ProjectsContainer projects={bookmarkedProjects} />
         </div>
       );
     };
