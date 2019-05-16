@@ -1,7 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 
 const NewProject = project => {
   const iconClass = `devicons devicons-${project.language.toLowerCase()}`;
+  const localUrl = 'http://localhost:1323/users/3/bookmarked_projects';
+
+  const addBookmarkProject = (e, project) => {
+    e.preventDefault();
+    console.log(project);
+    //console.log(e);
+
+    saveNewBookmarked(project);
+  };
+
+  const saveNewBookmarked = project => {
+    axios
+      .post(localUrl, {
+        name: project.name,
+        description: project.description,
+        author: project.author,
+        language: project.language,
+        url: project.url,
+      })
+      .then(function(response) {
+        console.log(response);
+        if (response.status === 200) {
+          //console.log(response.data);
+        }
+      })
+      .catch(function(error) {
+        console.log(error.response);
+      });
+  };
 
   return (
     <div className="column is-one-third">
@@ -60,7 +90,12 @@ const NewProject = project => {
               </p>
             </div>
             <div className="level">
-              <a href="www.foobar.com" className="level-item level-right">
+              <a
+                href="www.foobar.com"
+                onClick={e => {
+                  addBookmarkProject(e, project);
+                }}
+                className="level-item level-right">
                 <span className="icon is-small">
                   <i className="fas fa-heart" />
                 </span>

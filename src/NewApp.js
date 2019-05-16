@@ -34,7 +34,6 @@ class NewApp extends Component {
         currentLanguage: user.favorite_language.toLowerCase(),
       });
       if (user.favorite_language) {
-        console.log('ok');
         this.fetchRepos(user.favorite_language.toLowerCase());
       }
     } else {
@@ -55,7 +54,7 @@ class NewApp extends Component {
   }
 
   fetchRepos(language, frequency = 'Daily') {
-    console.log(`Fetching repos for ${language}, frequency: ${frequency}`);
+    //console.log(`Fetching repos for ${language}, frequency: ${frequency}`);
     const url = `https://github-trending-api.now.sh/repositories?language=${language.toLowerCase()}&since=${frequency.toLowerCase()}`;
     axios
       .get(url)
@@ -68,18 +67,18 @@ class NewApp extends Component {
   }
 
   handleChangeLanguage(language) {
-    console.log(`NewApp -> language: ${language}`);
+    //console.log(`NewApp -> language: ${language}`);
     this.setState({currentLanguage: language});
     this.fetchRepos(language);
   }
 
   handleAddLanguage(language) {
-    console.log(`NewApp -> language: ${language}`);
+    //console.log(`NewApp -> language: ${language}`);
     this.setState({languages: [...this.state.languages, language]});
   }
 
   handleChangeFrequency(frequency) {
-    console.log(`NewApp -> frequency: ${frequency}`);
+    //console.log(`NewApp -> frequency: ${frequency}`);
     this.fetchRepos(this.state.currentLanguage, frequency);
   }
 
