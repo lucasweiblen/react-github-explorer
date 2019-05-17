@@ -1,6 +1,5 @@
 import React, {Component, useState, useEffect} from 'react';
 import 'bulma/css/bulma.css';
-import axios from 'axios';
 import NewNavBar from './components/Navbar/NewNavbar';
 import ProjectsContainer from './components/Project/ProjectsContainer';
 import Login from './components/Login/Login';
@@ -24,7 +23,6 @@ class NewApp extends Component {
   }
 
   componentDidMount() {
-    console.log(config.githubAPI);
     //this will be fetched only if user is logged in
     const user = this.isLoggedIn();
     if (user !== null) {
@@ -114,8 +112,8 @@ class NewApp extends Component {
       const [bookmarkedProjects, setBookmarkedProjects] = useState([]);
 
       const fetchBookmarkedProjects = () => {
-        const url = `http://localhost:1323/users/${id}/bookmarked_projects`;
-        return axios.get(url);
+        const url = `users/${id}/bookmarked_projects`;
+        return config.appAPI.get(url);
       };
 
       useEffect(() => {
