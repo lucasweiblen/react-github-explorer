@@ -1,9 +1,9 @@
 import React, {Component, useState, useEffect} from 'react';
 import 'bulma/css/bulma.css';
 import axios from 'axios';
-import NewNavBar from './components/NewNavbar';
-import ProjectsContainer from './components/ProjectsContainer';
-import Login from './components/Login';
+import NewNavBar from './components/Navbar/NewNavbar';
+import ProjectsContainer from './components/Project/ProjectsContainer';
+import Login from './components/Login/Login';
 import {Link, Router} from '@reach/router';
 
 class NewApp extends Component {
