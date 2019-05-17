@@ -3,7 +3,6 @@ import 'bulma/css/bulma.css';
 import axios from 'axios';
 import NewNavBar from './components/NewNavbar';
 import ProjectsContainer from './components/ProjectsContainer';
-//import {languages, frequencies, projects} from './const';
 import Login from './components/Login';
 import {Link, Router} from '@reach/router';
 
@@ -12,7 +11,7 @@ class NewApp extends Component {
     super(props);
     this.state = {
       languages: [],
-      frequencies: ['Daily'],
+      frequencies: ['Daily', 'Weekly', 'Monthly'],
       projects: [],
       currentLanguage: '',
       loggedIn: false,
