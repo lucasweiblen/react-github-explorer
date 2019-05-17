@@ -1,21 +1,19 @@
 import React from 'react';
-import axios from 'axios';
+import {config} from '../../config/httpClient';
+import './NewProject.css';
 
 const NewProject = project => {
-  const iconClass = `devicons devicons-${project.language.toLowerCase()}`;
-  const localUrl = 'http://localhost:1323/users/3/bookmarked_projects';
+  const iconClass = `project__languageicon devicons devicons-${project.language.toLowerCase()}`;
+  const url = 'users/3/bookmarked_projects';
 
   const addBookmarkProject = (e, project) => {
     e.preventDefault();
-    console.log(project);
-    //console.log(e);
-
     saveNewBookmarked(project);
   };
 
   const saveNewBookmarked = project => {
-    axios
-      .post(localUrl, {
+    config.appAPI
+      .post(url, {
         name: project.name,
         description: project.description,
         author: project.author,
@@ -35,22 +33,14 @@ const NewProject = project => {
 
   return (
     <div className="column is-one-third">
-      <div className="box" style={{height: '100%'}}>
+      <div className="box project__box">
         <div className="media">
           <div className="media-content">
             <div className="content">
               <p>
                 <strong>{project.name}</strong>
               </p>
-              <p
-                className="description"
-                style={{
-                  display: 'block',
-                  minHeight: '48px',
-                  overflow: 'hidden',
-                }}>
-                {project.description}
-              </p>
+              <p className="project__description">{project.description}</p>
 
               <p>
                 <span>
@@ -60,19 +50,11 @@ const NewProject = project => {
                 <span>{project.author}</span>
               </p>
               <p>
-                <i
-                  className={iconClass}
-                  style={{
-                    fontSize: '30px',
-                    marginLeft: '-8px',
-                    position: 'relative',
-                    top: '5px',
-                  }}
-                />
+                <i className={iconClass} />
                 &nbsp;&nbsp;
                 {project.language}
               </p>
-              <p style={{height: '48px'}}>
+              <p className="project__url">
                 <span>
                   <i className="fas fa-link" />
                 </span>

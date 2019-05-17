@@ -1,0 +1,30 @@
+.project__box {
+  background-color: cyan;
+  height: 100%;
+}
+
+.project__url {
+  height: 72px;
+}
+
+.project__languageicon {
+  font-size: 30px;
+  margin-left: -8px;
+  position: relative;
+  top: 5px;
+}
+
+.project__description {
+  display: block;
+  /*min-height: 48px;*/
+  height: 72px;
+  overflow: hidden;
+}
+
+/*@media (max-width: 920px) {*/
+/*.project__description {*/
+/*background-color: green;*/
+/*text-transform: uppercase;*/
+/*[>height: 72px;<]*/
+/*}*/
+/*}*/

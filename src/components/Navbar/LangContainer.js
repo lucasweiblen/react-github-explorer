@@ -5,7 +5,6 @@ const LangContainer = ({languages, current, onChangeLanguage}) => {
   const [_current, setCurrent] = useState(current);
 
   const handleCurrentLanguage = e => {
-    console.log(e.target.textContent);
     setCurrent(e.target.textContent);
     onChangeLanguage(e.target.textContent);
   };
