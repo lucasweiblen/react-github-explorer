@@ -1,0 +1,17 @@
+/* S9/S9*/
+@media (max-width: 360px) {
+  .level__form {
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  .level__language {
+    /*margin-left: -100px;*/
+    margin-top: 20px;
+  }
+
+  .level__frequency {
+    width: 200px;
+    margin: 20px auto;
+  }
+}

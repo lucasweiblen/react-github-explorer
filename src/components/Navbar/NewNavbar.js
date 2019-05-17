@@ -2,6 +2,7 @@ import React from 'react';
 import AddLangForm from './AddLangForm';
 import LangContainer from './LangContainer';
 import FreqContainer from './FreqContainer';
+import './NewNavbar.css';
 
 const NewNavBar = props => {
   const handleChangeLanguage = language => {
@@ -21,20 +22,20 @@ const NewNavBar = props => {
 
   return (
     <div className="level">
-      <div className="level-left">
+      <div className="level-left level__form">
         <AddLangForm
           languages={props.languages}
           onAddLanguage={handleAddLanguage}
         />
       </div>
-      <div className="level-item">
+      <div className="level-item level__language">
         <LangContainer
           onChangeLanguage={handleChangeLanguage}
           languages={props.languages}
           current={props.currentLanguage}
         />
       </div>
-      <div className="level-right">
+      <div className="level-right level__frequency">
         <FreqContainer
           onChangeFrequency={handleChangeFrequency}
           frequencies={props.frequencies}
