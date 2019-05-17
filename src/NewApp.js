@@ -5,6 +5,7 @@ import NewNavBar from './components/Navbar/NewNavbar';
 import ProjectsContainer from './components/Project/ProjectsContainer';
 import Login from './components/Login/Login';
 import {Link, Router} from '@reach/router';
+import {config} from './config/httpClient';
 
 class NewApp extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class NewApp extends Component {
   }
 
   componentDidMount() {
+    console.log(config.githubAPI);
     //this will be fetched only if user is logged in
     const user = this.isLoggedIn();
     if (user !== null) {
@@ -53,9 +55,8 @@ class NewApp extends Component {
   }
 
   fetchRepos(language, frequency = 'Daily') {
-    //console.log(`Fetching repos for ${language}, frequency: ${frequency}`);
-    const url = `https://github-trending-api.now.sh/repositories?language=${language.toLowerCase()}&since=${frequency.toLowerCase()}`;
-    axios
+    const url = `repositories?language=${language.toLowerCase()}&since=${frequency.toLowerCase()}`;
+    config.githubAPI
       .get(url)
       .then(response => {
         this.setState({projects: response.data});
