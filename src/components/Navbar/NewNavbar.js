@@ -5,17 +5,17 @@ import FreqContainer from './FreqContainer';
 
 const NewNavBar = props => {
   const handleChangeLanguage = language => {
-    console.log(`NewNavBar -> language: ${language}`);
+    //console.log(`NewNavBar -> language: ${language}`);
     props.onChangeLanguage(language);
   };
 
   const handleAddLanguage = language => {
-    console.log(`NewNavBar -> language: ${language}`);
+    //console.log(`NewNavBar -> language: ${language}`);
     props.onAddLanguage(language);
   };
 
   const handleChangeFrequency = frequency => {
-    console.log(`NewNavBar -> frequency: ${frequency}`);
+    //console.log(`NewNavBar -> frequency: ${frequency}`);
     props.onChangeFrequency(frequency);
   };
 
