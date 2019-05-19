@@ -16,9 +16,9 @@ const Signup = () => {
   };
 
   const handleClick = () => {
-    const url = `/signup`;
+    const url = `/users`;
 
-    config.appApi
+    config.appAPI
       .post(url, {
         username: username,
         email: email,
@@ -30,12 +30,13 @@ const Signup = () => {
           //const dataToBeStored = JSON.stringify(response.data);
           //localStorage.setItem('user', dataToBeStored);
           //setLoggedIn(true);
-          //navigate('/projects');
+          navigate('/projects');
         }
       })
       .catch(function(error) {
         console.log(error.response);
         if (error.response && error.response.status === 403) {
+          // show errors
           //setLoggedIn(false);
         }
       });
