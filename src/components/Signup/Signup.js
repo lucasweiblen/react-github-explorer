@@ -27,6 +27,7 @@ const Signup = () => {
       .then(function(response) {
         console.log(response);
         if (response.status === 200) {
+          // STORE user data and JWT TOKEN on localStorage
           //const dataToBeStored = JSON.stringify(response.data);
           //localStorage.setItem('user', dataToBeStored);
           //setLoggedIn(true);

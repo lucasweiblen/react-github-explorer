@@ -109,6 +109,9 @@ class NewApp extends Component {
     };
 
     const BookmarkedProjects = props => {
+      // fix this
+      // isLogged -> get user id from localStorage -> fetchBookmarkedProjects
+      // notLogged -> does not do anything
       const id = props.id || 3;
       const [bookmarkedProjects, setBookmarkedProjects] = useState([]);
 
