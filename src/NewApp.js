@@ -3,6 +3,7 @@ import 'bulma/css/bulma.css';
 import NewNavBar from './components/Navbar/NewNavbar';
 import ProjectsContainer from './components/Project/ProjectsContainer';
 import Login from './components/Login/Login';
+import Signup from './components/Signup/Signup';
 import {Link, Router} from '@reach/router';
 import {config} from './config/httpClient';
 
@@ -140,6 +141,9 @@ class NewApp extends Component {
         <nav className="container">
           {this.state.loggedIn ? (
             <div>
+              <Link className="button" to="/signup">
+                Signup
+              </Link>
               <Link className="button" to="/">
                 Home
               </Link>
@@ -159,6 +163,7 @@ class NewApp extends Component {
         <Router>
           <Home path="/" />
           <Login path="/login" />
+          <Signup path="/signup" />
           <Projects path="/projects" />
           <BookmarkedProjects path="/bookmarked_projects" />
         </Router>

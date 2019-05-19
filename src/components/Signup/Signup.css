@@ -1,0 +1,19 @@
+.signup input[type='text'] {
+  width: 400px;
+}
+
+.signup input[type='email'] {
+  width: 400px;
+}
+
+.signup input[type='password'] {
+  width: 400px;
+}
+
+.signup button {
+  width: 400px;
+}
+
+.signup .field {
+  width: 400px;
+}
