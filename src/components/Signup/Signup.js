@@ -8,7 +8,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [validEmail, setValidEmail] = useState(false);
-  //const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const validateEmail = email => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -28,9 +28,10 @@ const Signup = () => {
         console.log(response);
         if (response.status === 200) {
           // STORE user data and JWT TOKEN on localStorage
-          //const dataToBeStored = JSON.stringify(response.data);
-          //localStorage.setItem('user', dataToBeStored);
-          //setLoggedIn(true);
+          const dataToBeStored = JSON.stringify(response.data);
+          localStorage.setItem('token', dataToBeStored['token']);
+          localStorage.setItem('user', dataToBeStored['user']);
+          setLoggedIn(true);
           navigate('/projects');
         }
       })
@@ -38,7 +39,7 @@ const Signup = () => {
         console.log(error.response);
         if (error.response && error.response.status === 403) {
           // show errors
-          //setLoggedIn(false);
+          setLoggedIn(false);
         }
       });
   };

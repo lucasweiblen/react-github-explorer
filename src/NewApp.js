@@ -26,12 +26,16 @@ class NewApp extends Component {
   componentDidMount() {
     //this will be fetched only if user is logged in
     const user = this.isLoggedIn();
-    if (user !== null) {
+    if (user) {
       this.setState({
         loggedIn: true,
-        languages: user.languages.toLowerCase().split(','),
-        frequency: user.frequency.toLowerCase(),
-        currentLanguage: user.favorite_language.toLowerCase(),
+        languages: user.languages
+          ? user.languages.toLowerCase().split(',')
+          : [],
+        frequency: user.frequency ? user.frequency.toLowerCase() : 'Daily',
+        currentLanguage: user.favorite_language
+          ? user.favorite_language.toLowerCase()
+          : '',
       });
       if (user.favorite_language) {
         this.fetchRepos(user.favorite_language.toLowerCase());
@@ -42,15 +46,10 @@ class NewApp extends Component {
   }
 
   isLoggedIn() {
-    if (localStorage.getItem('user') !== null) {
-      const data = localStorage.getItem('user');
-      const userData = JSON.parse(data);
-      this.setState({loggedIn: true});
-      return userData;
-    } else {
-      this.setState({loggedIn: false});
-      return null;
-    }
+    return (
+      localStorage.getItem('user') !== 'undefined' &&
+      localStorage.getItem('token') !== 'undefined'
+    );
   }
 
   fetchRepos(language, frequency = 'Daily') {

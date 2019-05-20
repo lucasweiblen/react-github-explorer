@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import axios from 'axios';
 import './Login.css';
+import {config} from '../../config/httpClient';
 import {navigate} from '@reach/router';
 
 const Login = () => {
@@ -16,18 +16,18 @@ const Login = () => {
   };
 
   const handleClick = () => {
-    const localUrl = 'http://localhost:1323/users/login';
+    const url = '/users/login';
 
-    axios
-      .post(localUrl, {
+    config.appAPI
+      .post(url, {
         username: username,
         email: email,
         password: password,
       })
       .then(function(response) {
         if (response.status === 200) {
-          const dataToBeStored = JSON.stringify(response.data);
-          localStorage.setItem('user', dataToBeStored);
+          localStorage.setItem('token', JSON.stringify(response.data['token']));
+          localStorage.setItem('user', JSON.stringify(response.data['user']));
           setLoggedIn(true);
           navigate('/projects');
         }
