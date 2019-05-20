@@ -115,6 +115,10 @@ class NewApp extends Component {
       const [bookmarkedProjects, setBookmarkedProjects] = useState([]);
 
       const fetchBookmarkedProjects = () => {
+        const token = JSON.parse(localStorage.getItem('token'));
+        config.appAPI.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${token}`;
         const url = `users/${id}/bookmarked_projects`;
         return config.appAPI.get(url);
       };
