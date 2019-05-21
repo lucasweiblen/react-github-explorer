@@ -4,7 +4,8 @@ import './NewProject.css';
 
 const NewProject = project => {
   const iconClass = `project__languageicon devicons devicons-${project.language.toLowerCase()}`;
-  const url = 'users/3/bookmarked_projects';
+  const id = JSON.parse(localStorage.getItem('user')).id;
+  const url = `users/${id}/bookmarked_projects`;
 
   const addBookmarkProject = (e, project) => {
     e.preventDefault();
@@ -12,6 +13,8 @@ const NewProject = project => {
   };
 
   const saveNewBookmarked = project => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    config.appAPI.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     config.appAPI
       .post(url, {
         name: project.name,
