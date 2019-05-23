@@ -155,10 +155,10 @@ class NewApp extends Component {
         <nav className="container">
           {this.state.loggedIn ? (
             <div>
-              <Link className="button" to="projects">
+              <Link className="button is-light" to="projects">
                 Browse
               </Link>
-              <Link className="button" to="bookmarked_projects">
+              <Link className="button is-light" to="bookmarked_projects">
                 My Bookmarked Projects
               </Link>
             </div>

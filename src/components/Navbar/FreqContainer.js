@@ -12,8 +12,8 @@ const FreqContainer = props => {
   const _freq = frequencies.map((frequency, key) => {
     const _btnClass =
       _current === frequency
-        ? 'button is-small is-active'
-        : 'button is-small is-primary is-inverted';
+        ? 'button is-active'
+        : 'button is-primary is-inverted';
 
     return (
       <button className={_btnClass} key={key} onClick={handleCurrentFrequency}>
