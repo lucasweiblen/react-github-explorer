@@ -8,7 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [validEmail, setValidEmail] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  //const [loggedIn, setLoggedIn] = useState(false);
 
   const validateEmail = email => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -28,14 +28,14 @@ const Login = () => {
         if (response.status === 200) {
           localStorage.setItem('token', JSON.stringify(response.data['token']));
           localStorage.setItem('user', JSON.stringify(response.data['user']));
-          setLoggedIn(true);
-          navigate('/projects');
+          //setLoggedIn(true);
+          navigate('/');
         }
       })
       .catch(function(error) {
         console.log(error.response);
         if (error.response && error.response.status === 403) {
-          setLoggedIn(false);
+          //setLoggedIn(false);
         }
       });
   };
@@ -64,7 +64,6 @@ const Login = () => {
     <div className="container login">
       <div className="columns is-mobile is-centered">
         <div className="column is-half">
-          {loggedIn ? 'Logged in' : 'Not logged in'}
           <div className="field">
             <div className="control has-icons-left">
               <input

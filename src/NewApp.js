@@ -25,6 +25,7 @@ class NewApp extends Component {
 
   componentDidMount() {
     const user = this.isLoggedIn();
+    console.log(user);
     if (user) {
       this.setState({
         loggedIn: true,
@@ -139,15 +140,21 @@ class NewApp extends Component {
 
     const Hero = () => {
       return (
-        <section class="hero is-small is-primary is-bold">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title">Trending Repos</h1>
-              <h2 class="subtitle">Explore interesting projects @ GitHub</h2>
+        <section className="hero is-small is-primary is-bold">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">Trending Repos</h1>
+              <h2 className="subtitle">
+                Explore interesting projects @ GitHub
+              </h2>
             </div>
           </div>
         </section>
       );
+    };
+
+    const handleSignIn = () => {
+      this.setState({loggedIn: true});
     };
 
     return (
@@ -157,7 +164,7 @@ class NewApp extends Component {
         <nav className="container">
           {this.state.loggedIn ? (
             <div>
-              <Link className="button is-light" to="projects">
+              <Link className="button is-light" to="/">
                 Browse
               </Link>
               <Link className="button is-light" to="bookmarked_projects">
@@ -169,7 +176,7 @@ class NewApp extends Component {
               <Link className="button is-light" to="login">
                 Sign in
               </Link>
-              <Link className="button is-light" to="/signup">
+              <Link className="button is-light" to="signup">
                 Sign up
               </Link>
             </div>
@@ -177,7 +184,7 @@ class NewApp extends Component {
         </nav>
         <Router>
           <Login path="/login" />
-          <Signup path="/signup" />
+          <Signup onSignIn={handleSignIn} path="/signup" />
           <Projects path="/" />
           <BookmarkedProjects path="/bookmarked_projects" />
         </Router>

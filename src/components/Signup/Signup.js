@@ -3,12 +3,11 @@ import './Signup.css';
 import {navigate} from '@reach/router';
 import {config} from '../../config/httpClient';
 
-const Signup = () => {
+const Signup = props => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [validEmail, setValidEmail] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const validateEmail = email => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -25,20 +24,22 @@ const Signup = () => {
         password: password,
       })
       .then(function(response) {
-        console.log(response);
         if (response.status === 200) {
-          const dataToBeStored = JSON.stringify(response.data);
-          localStorage.setItem('token', dataToBeStored['token']);
-          localStorage.setItem('user', dataToBeStored['user']);
-          setLoggedIn(true);
-          navigate('/projects');
+          const dataToBeStored = response.data;
+          //console.log(dataToBeStored);
+          localStorage.setItem(
+            'token',
+            JSON.stringify(dataToBeStored['token']),
+          );
+          localStorage.setItem('user', JSON.stringify(dataToBeStored['user']));
+          props.onSignIn();
+          navigate('/');
         }
       })
       .catch(function(error) {
         console.log(error.response);
         if (error.response && error.response.status === 403) {
           // show errors
-          setLoggedIn(false);
         }
       });
   };
