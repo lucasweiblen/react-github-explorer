@@ -24,7 +24,6 @@ class NewApp extends Component {
   }
 
   componentDidMount() {
-    //this will be fetched only if user is logged in
     const user = this.isLoggedIn();
     if (user) {
       this.setState({
@@ -65,18 +64,15 @@ class NewApp extends Component {
   }
 
   handleChangeLanguage(language) {
-    //console.log(`NewApp -> language: ${language}`);
     this.setState({currentLanguage: language});
     this.fetchRepos(language);
   }
 
   handleAddLanguage(language) {
-    //console.log(`NewApp -> language: ${language}`);
     this.setState({languages: [...this.state.languages, language]});
   }
 
   handleChangeFrequency(frequency) {
-    //console.log(`NewApp -> frequency: ${frequency}`);
     this.fetchRepos(this.state.currentLanguage, frequency);
   }
 
@@ -139,17 +135,26 @@ class NewApp extends Component {
       );
     };
 
+    const Hero = () => {
+      return (
+        <section class="hero is-small is-primary is-bold">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">Trending Repos</h1>
+              <h2 class="subtitle">Explore interesting projects @ GitHub</h2>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
     return (
       <div className="App">
+        <Hero />
+        <div className="block" />
         <nav className="container">
           {this.state.loggedIn ? (
             <div>
-              <Link className="button" to="/signup">
-                Signup
-              </Link>
-              <Link className="button" to="/">
-                Home
-              </Link>
               <Link className="button" to="projects">
                 Browse
               </Link>
@@ -158,16 +163,20 @@ class NewApp extends Component {
               </Link>
             </div>
           ) : (
-            <Link className="button" to="login">
-              Login
-            </Link>
+            <div>
+              <Link className="button" to="login">
+                Login
+              </Link>
+              <Link className="button" to="/signup">
+                Signup
+              </Link>
+            </div>
           )}
         </nav>
         <Router>
-          <Home path="/" />
           <Login path="/login" />
           <Signup path="/signup" />
-          <Projects path="/projects" />
+          <Projects path="/" />
           <BookmarkedProjects path="/bookmarked_projects" />
         </Router>
       </div>
