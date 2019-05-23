@@ -25,7 +25,6 @@ class NewApp extends Component {
 
   componentDidMount() {
     const user = this.isLoggedIn();
-    console.log(user);
     if (user) {
       this.setState({
         loggedIn: true,
@@ -89,19 +88,19 @@ class NewApp extends Component {
       onChangeFrequency: this.handleChangeFrequency,
     };
 
-    const Home = () => {
-      return <div>Home</div>;
-    };
-
     const Projects = () => {
       return (
         <div>
           <div className="block" />
-          <div className="container">
-            <NewNavBar {...navbarProps} />
-            <div className="block" />
-            <ProjectsContainer projects={this.state.projects} />
-          </div>
+          {this.state.loggedIn ? (
+            <div className="container">
+              <NewNavBar {...navbarProps} />
+              <div className="block" />
+              <ProjectsContainer projects={this.state.projects} />
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       );
     };
