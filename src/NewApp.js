@@ -183,7 +183,7 @@ class NewApp extends Component {
           )}
         </nav>
         <Router>
-          <Login path="/login" />
+          <Login onSignIn={handleSignIn} path="/login" />
           <Signup onSignIn={handleSignIn} path="/signup" />
           <Projects path="/" />
           <BookmarkedProjects path="/bookmarked_projects" />

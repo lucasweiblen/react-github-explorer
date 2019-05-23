@@ -3,7 +3,7 @@ import './Login.css';
 import {config} from '../../config/httpClient';
 import {navigate} from '@reach/router';
 
-const Login = () => {
+const Login = props => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,6 +29,7 @@ const Login = () => {
           localStorage.setItem('token', JSON.stringify(response.data['token']));
           localStorage.setItem('user', JSON.stringify(response.data['user']));
           //setLoggedIn(true);
+          props.onSignIn();
           navigate('/');
         }
       })
