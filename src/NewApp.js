@@ -25,6 +25,7 @@ class NewApp extends Component {
 
   componentDidMount() {
     const user = this.isLoggedIn();
+    console.log(user);
     if (user) {
       this.setState({
         loggedIn: true,
@@ -47,7 +48,9 @@ class NewApp extends Component {
   isLoggedIn() {
     return (
       localStorage.getItem('user') !== 'undefined' &&
-      localStorage.getItem('token') !== 'undefined'
+      localStorage.getItem('token') !== 'undefined' &&
+      localStorage.getItem('user') !== null &&
+      localStorage.getItem('token') !== null
     );
   }
 
@@ -164,11 +167,11 @@ class NewApp extends Component {
             </div>
           ) : (
             <div>
-              <Link className="button" to="login">
-                Login
+              <Link className="button is-light" to="login">
+                Sign in
               </Link>
-              <Link className="button" to="/signup">
-                Signup
+              <Link className="button is-light" to="/signup">
+                Sign up
               </Link>
             </div>
           )}
